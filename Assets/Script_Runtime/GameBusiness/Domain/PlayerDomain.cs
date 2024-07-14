@@ -32,19 +32,23 @@ public static class PlayerDomain
             Debug.Log(inputKeyIndex);
             ctx.inputEntity.animIsPlaying = true;
 
-            player.rb.DOJump(player.rb.position + new Vector2(player.step.x * inputKeyIndex, player.step.y), player.jumpForce, 1, 0.2f);
-
-            player.intervalTimer -= dt;
-            if (player.intervalTimer <= 0)
+            var jumpAnim = player.rb.DOJump(player.rb.position + new Vector2(player.step.x * inputKeyIndex, player.step.y), player.jumpForce, 1, 0.2f).
+            SetEase(Ease.OutCubic).OnComplete(() =>
             {
-                Debug.Log("DoJump");
-                ctx.inputEntity.inputKeyIndex = 0;
-
-
                 ctx.inputEntity.animIsPlaying = false;
-                player.intervalTimer = player.interval;
-            }
+            });
+            ctx.inputEntity.animIsPlaying = jumpAnim.IsPlaying();
+            // player.intervalTimer -= dt;
+            // if (player.intervalTimer <= 0)
+            // {
+            //     Debug.Log("DoJump");
 
+
+            //     ctx.inputEntity.animIsPlaying = false;
+            //     player.intervalTimer = player.interval;
+            // }
+
+            ctx.inputEntity.inputKeyIndex = 0;
 
         }
     }
