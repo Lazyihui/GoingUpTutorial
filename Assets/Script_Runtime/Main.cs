@@ -26,14 +26,17 @@ public class Main : MonoBehaviour
             if (i != ctx.gameContext.gameEntity.groundCount - 1)
             {
                 Vector2 pos = spawnPos - Vector2.up * 2f;
-                GroundEntity ground = GroundDomain.Spawn(ctx.gameContext, pos);
+                GroundEntity ground = GroundDomain.Spawn(ctx.gameContext, pos, 0);
                 ground.transform.DOMove(ground.transform.position + Vector3.up * 2f, 0.5f).SetDelay(0.1f * i);
 
             }
             else
             {//goals
-                Debug.Log("goals");
-                // GroundDomain.Spawn(ctx.gameContext, spawnPos, true);
+                Vector2 pos = spawnPos - Vector2.up * 2f;
+                GroundEntity goal = GroundDomain.Spawn(ctx.gameContext, pos, 1);
+                goal.transform.DOMove(goal.transform.position + Vector3.up * 2f, 0.5f).SetDelay(0.1f * i);
+
+
             }
 
 

@@ -5,27 +5,41 @@ using DG.Tweening;
 
 public static class GroundDomain
 {
-    public static GroundEntity Spawn(GameContext ctx, Vector2 pos)
+    public static GroundEntity Spawn(GameContext ctx, Vector2 pos, int typeID)
     {
-        bool has = ctx.assetsContext.TryGetEntity("Ground_Entity", out GameObject ground);
-        if (!has)
+        if (typeID == 0)
         {
-            Debug.LogError("Ground_Entity not found");
-            return null;
+
+            bool has = ctx.assetsContext.TryGetEntity("Ground_Entity", out GameObject ground);
+
+            GameObject go = GameObject.Instantiate(ground);
+            GroundEntity groundEntity = go.GetComponent<GroundEntity>();
+            groundEntity.Ctor();
+            groundEntity.Setpos(pos);
+            groundEntity.id = ctx.gameEntity.groundID++;
+            ctx.groundRespository.Add(groundEntity);
+
+
+            return groundEntity;
         }
-        GameObject go = GameObject.Instantiate(ground);
-        GroundEntity groundEntity = go.GetComponent<GroundEntity>();
-        groundEntity.Ctor();
-        groundEntity.Setpos(pos);
-        groundEntity.id = ctx.gameEntity.groundID++;
-        ctx.groundRespository.Add(groundEntity);
+        else
+        {
+            bool has = ctx.assetsContext.TryGetEntity("Goal_Entity", out GameObject goal);
 
+            GameObject go = GameObject.Instantiate(goal);
+            GroundEntity goalEntity = go.GetComponent<GroundEntity>();
+            goalEntity.Ctor();
+            goalEntity.Setpos(pos);
+            goalEntity.id = ctx.gameEntity.groundID++;
+            ctx.groundRespository.Add(goalEntity);
 
-        return groundEntity;
+            return goalEntity;
+        }
     }
 
     public static void Move(GameContext ctx, GroundEntity ground, float dt)
     {
+        ground.transform.DOMove(ground.transform.position + Vector3.up * 2f, 0.5f);
     }
 
 }
