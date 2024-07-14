@@ -17,6 +17,7 @@ public static class PlayerDomain
         GameObject go = GameObject.Instantiate(player);
         PlayerEntity playerEntity = go.GetComponent<PlayerEntity>();
         playerEntity.Ctor();
+        playerEntity.id = ctx.gameEntity.playerID++;
         ctx.playerRespository.Add(playerEntity);
 
         return playerEntity;

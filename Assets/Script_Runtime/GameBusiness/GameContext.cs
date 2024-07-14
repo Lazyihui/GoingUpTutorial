@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 public class GameContext{
     public PlayerRespository playerRespository;
+    public GroundRespository groundRespository;
 
     public InputEntity inputEntity;
 
@@ -10,6 +11,7 @@ public class GameContext{
     public gameEntity gameEntity;
     public GameContext(){
         playerRespository = new PlayerRespository();
+        groundRespository = new GroundRespository();
         inputEntity = new InputEntity();
         gameEntity = new gameEntity();
     }
