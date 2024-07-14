@@ -15,10 +15,10 @@ public class Main : MonoBehaviour
 
 
         PlayerDomain.Spawn(ctx.gameContext);
+        Vector2 spawnPos = Vector2.zero;
 
         for (int i = 0; i < ctx.gameContext.gameEntity.groundCount; i++)
         {
-            Vector2 spawnPos = Vector2.zero;
             int randomDir = Random.Range(0f, 1f) > 0.5f ? 1 : -1;
             spawnPos += new Vector2(ctx.gameContext.gameEntity.step.x * randomDir, ctx.gameContext.gameEntity.step.y);
 
@@ -26,7 +26,9 @@ public class Main : MonoBehaviour
             if (i != ctx.gameContext.gameEntity.groundCount - 1)
             {
                 Vector2 pos = spawnPos - Vector2.up * 2f;
-               GroundDomain.Spawn(ctx.gameContext, pos);
+                GroundEntity ground = GroundDomain.Spawn(ctx.gameContext, pos);
+                ground.transform.DOMove(ground.transform.position + Vector3.up * 2f, 0.5f).SetDelay(0.1f * i);
+
             }
             else
             {//goals
