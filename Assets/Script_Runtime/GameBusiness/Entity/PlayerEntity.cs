@@ -13,6 +13,8 @@ public class PlayerEntity : MonoBehaviour
 
     public Vector2 step;
 
+    public bool animIsPlaying;
+
     public void Ctor()
     {
         jumpForce = 2.5f;
