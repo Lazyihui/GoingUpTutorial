@@ -5,10 +5,12 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     Context ctx;
+    bool isTearDown = false;
     void Awake()
     {//new
         ctx = new Context();
         ctx.Inject();
+        ModuleAssets.Load(ctx.assetsContext);
         Debug.Assert(ctx != null);
         PlayerDomain.Spawn(ctx.gameContext);
     }
@@ -49,5 +51,21 @@ public class Main : MonoBehaviour
             PlayerEntity player = players[i];
             PlayerDomain.DoJump(ctx.gameContext, player);
         }
+    }
+      void OnDestory() {
+        TearDown();
+    }
+
+    void OnApplicationQuit() {
+        TearDown();
+    }
+
+    void TearDown() {
+        if (isTearDown) {
+            return;
+        }
+        isTearDown = true;
+        // === Unload===
+        ModuleAssets.Unload(ctx.assetsContext);
     }
 }
