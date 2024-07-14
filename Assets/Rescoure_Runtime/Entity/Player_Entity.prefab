@@ -131,4 +131,6 @@ MonoBehaviour:
   id: 0
   inputKeyIndex: 0
   jumpForce: 2.5
-  step: {x: 4.5, y: 7.5}
+  step: {x: 4.25, y: 7.5}
+  interval: 0
+  intervalTimer: 0

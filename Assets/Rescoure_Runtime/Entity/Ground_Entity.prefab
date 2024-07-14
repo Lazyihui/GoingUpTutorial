@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  step: {x: 0, y: 0}
+  step: {x: 4.25, y: 7.5}
