@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerEntity : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
+    [SerializeField] public Rigidbody2D rb;
 
     public int id;
     public int inputKeyIndex;
