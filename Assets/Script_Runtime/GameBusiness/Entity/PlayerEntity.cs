@@ -13,10 +13,15 @@ public class PlayerEntity : MonoBehaviour
 
     public Vector2 step;
 
-    public bool animIsPlaying;
+    public float interval;
+
+    public float intervalTimer;
 
     public void Ctor()
     {
         jumpForce = 2.5f;
+        interval = 0.2f;
+        intervalTimer = 0.2f;
+
     }
 }

@@ -49,7 +49,7 @@ public class Main : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             PlayerEntity player = players[i];
-            PlayerDomain.DoJump(ctx.gameContext, player);
+            PlayerDomain.DoJump(ctx.gameContext, player,dt);
         }
     }
       void OnDestory() {

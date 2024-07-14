@@ -22,18 +22,30 @@ public static class PlayerDomain
         return playerEntity;
     }
 
-    public static void DoJump(GameContext ctx, PlayerEntity player)
+    public static void DoJump(GameContext ctx, PlayerEntity player, float dt)
     {
         float inputKeyIndex = ctx.inputEntity.inputKeyIndex;
 
 
-        if (ctx.inputEntity.inputKeyIndex != 0&&!ctx.inputEntity.animIsPlaying)
+        if (ctx.inputEntity.inputKeyIndex != 0 && !ctx.inputEntity.animIsPlaying)
         {
             Debug.Log(inputKeyIndex);
-            player.rb.DOJump(new Vector2(player.step.x * inputKeyIndex, player.step.y), player.jumpForce, 1,0.005f);
-            inputKeyIndex = 0;
             ctx.inputEntity.animIsPlaying = true;
-            Debug.Log("DoJump");
+
+            player.rb.DOJump(player.rb.position + new Vector2(player.step.x * inputKeyIndex, player.step.y), player.jumpForce, 1, 0.2f);
+
+            player.intervalTimer -= dt;
+            if (player.intervalTimer <= 0)
+            {
+                Debug.Log("DoJump");
+                ctx.inputEntity.inputKeyIndex = 0;
+
+
+                ctx.inputEntity.animIsPlaying = false;
+                player.intervalTimer = player.interval;
+            }
+
+
         }
     }
 
