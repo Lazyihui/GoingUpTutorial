@@ -30,7 +30,6 @@ public static class PlayerDomain
 
         if (ctx.inputEntity.inputKeyIndex != 0 && !ctx.inputEntity.animIsPlaying)
         {
-            Debug.Log(inputKeyIndex);
             ctx.inputEntity.animIsPlaying = true;
 
             var jumpAnim = player.rb.DOJump(player.rb.position + new Vector2(player.step.x * inputKeyIndex, player.step.y), player.jumpForce, 1, 0.2f).

@@ -16,7 +16,7 @@ public class Main : MonoBehaviour {
         ctx.Inject();
         ModuleAssets.Load(ctx.assetsContext);
 
-
+    
         PlayerDomain.Spawn(ctx.gameContext);
         Vector2 spawnPos = Vector2.zero;
         GroundDomain.Spawn(ctx.gameContext, spawnPos, 0);
