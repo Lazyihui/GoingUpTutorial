@@ -50,6 +50,7 @@ public class Main : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         float dt = Time.deltaTime;
+        PreFix(dt);
         ref float restFixTime = ref ctx.gameContext.gameEntity.restFixTime;
 
         restFixTime += dt;
@@ -67,17 +68,14 @@ public class Main : MonoBehaviour {
             }
         }
 
+        LateFix(dt);
     }
-
-    void LateUpdate() {
-        float dt = Time.deltaTime;
-        PlayerEntity role = ctx.gameContext.playerRespository.Find(role => role.id == 0);
-        moduleCamera.Follow(role.transform.position, dt);
+    void PreFix(float dt) {
+        ctx.gameContext.inputEntity.Process();
     }
 
     void LogicFix(Context ctx, float dt) {
 
-        ctx.gameContext.inputEntity.Process();
 
         // player
         int len = ctx.gameContext.playerRespository.TakeAll(out PlayerEntity[] players);
@@ -91,6 +89,11 @@ public class Main : MonoBehaviour {
             GroundEntity ground = grounds[i];
         }
 
+    }
+
+    void LateFix(float dt) {
+        PlayerEntity role = ctx.gameContext.playerRespository.Find(role => role.id == 0);
+        moduleCamera.Follow(role.transform.position, dt);
     }
     void OnDestory() {
         TearDown();
