@@ -16,7 +16,7 @@ public class Main : MonoBehaviour {
         ctx.Inject();
         ModuleAssets.Load(ctx.assetsContext);
 
-    
+
         PlayerDomain.Spawn(ctx.gameContext);
         Vector2 spawnPos = Vector2.zero;
         GroundDomain.Spawn(ctx.gameContext, spawnPos, 0);
@@ -50,11 +50,10 @@ public class Main : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         float dt = Time.deltaTime;
-
         ref float restFixTime = ref ctx.gameContext.gameEntity.restFixTime;
 
         restFixTime += dt;
-        const float FIX_INTERVAL = 0.2f;
+        const float FIX_INTERVAL = 0.02f;
 
         if (restFixTime <= FIX_INTERVAL) {
 
@@ -70,6 +69,12 @@ public class Main : MonoBehaviour {
 
     }
 
+    void LateUpdate() {
+        float dt = Time.deltaTime;
+        PlayerEntity role = ctx.gameContext.playerRespository.Find(role => role.id == 0);
+        moduleCamera.Follow(role.transform.position, dt);
+    }
+
     void LogicFix(Context ctx, float dt) {
 
         ctx.gameContext.inputEntity.Process();
@@ -79,7 +84,6 @@ public class Main : MonoBehaviour {
         for (int i = 0; i < len; i++) {
             PlayerEntity player = players[i];
             PlayerDomain.DoJump(ctx.gameContext, player, dt);
-            moduleCamera.Follow(player.transform.position, dt);
         }
         // ground
         int groundLen = ctx.gameContext.groundRespository.TakeAll(out GroundEntity[] grounds);
