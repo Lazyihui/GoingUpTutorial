@@ -11,9 +11,9 @@ public class ModuleCamera {
         this.camera = camera;
     }
 
-    public void Follow(Vector3 targetPos,float dt) {
-        Vector3 offset = camera.transform.position - targetPos;
-        Vector2 TargetCameraPos = targetPos + offset;
-        camera.transform.position = new Vector3(TargetCameraPos.x, TargetCameraPos.y, camera.transform.position.z);
+    public void Follow(Vector3 targetPos, float dt) {
+        Vector3 offset = new Vector3(0, 25, -10);
+        Vector3 pos = new Vector3(targetPos.x + offset.x, targetPos.y + offset.y, targetPos.z - 10);
+        camera.transform.position = pos;
     }
 }

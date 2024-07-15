@@ -12,12 +12,14 @@ public class Main : MonoBehaviour {
         ctx = new Context();
         moduleCamera = new ModuleCamera();
         moduleCamera.Inject(mainCamera);
+
         ctx.Inject();
         ModuleAssets.Load(ctx.assetsContext);
 
 
         PlayerDomain.Spawn(ctx.gameContext);
         Vector2 spawnPos = Vector2.zero;
+        GroundDomain.Spawn(ctx.gameContext, spawnPos, 0);
 
         for (int i = 0; i < ctx.gameContext.gameEntity.groundCount; i++) {
             int randomDir = Random.Range(0f, 1f) > 0.5f ? 1 : -1;
