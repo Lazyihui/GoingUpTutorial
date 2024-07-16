@@ -134,3 +134,6 @@ MonoBehaviour:
   step: {x: 4.25, y: 7.5}
   interval: 0
   intervalTimer: 0
+  whatIsCoal:
+    serializedVersion: 2
+    m_Bits: 64

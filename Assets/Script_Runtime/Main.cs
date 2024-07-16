@@ -82,6 +82,7 @@ public class Main : MonoBehaviour {
         for (int i = 0; i < len; i++) {
             PlayerEntity player = players[i];
             PlayerDomain.DoJump(ctx.gameContext, player, dt);
+            PlayerDomain.TouchGround(ctx.gameContext, player);
         }
         // ground
         int groundLen = ctx.gameContext.groundRespository.TakeAll(out GroundEntity[] grounds);
@@ -93,7 +94,7 @@ public class Main : MonoBehaviour {
 
     void LateFix(float dt) {
         PlayerEntity role = ctx.gameContext.playerRespository.Find(role => role.id == 0);
-        moduleCamera.Follow(role.transform.position, dt);
+        moduleCamera.Follow(ctx.gameContext,role.transform.position, dt);
     }
     void OnDestory() {
         TearDown();

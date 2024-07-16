@@ -17,6 +17,8 @@ public class PlayerEntity : MonoBehaviour
 
     public float intervalTimer;
 
+    public LayerMask whatIsCoal;
+
     public void Ctor()
     {
         jumpForce = 2.5f;
